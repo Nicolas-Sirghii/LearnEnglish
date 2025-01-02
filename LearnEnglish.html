@@ -188,13 +188,14 @@ button {
 }
 #revweList {
   position: absolute;
-  background-color: rgb(85, 164, 85);
+  background-color: rgb(98, 85, 164);
   z-index: 5;
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/6/60/Review_%28TV_series%29.png');
+  background-size: cover;
+ 
   overflow: hidden;
 }
 
@@ -208,15 +209,17 @@ button {
   
 }
 #procent{
-  margin: 0;
-  font-size: 6vw;
-  color: rgb(70, 51, 153)
+  margin: 10px;
+  font-size: 3vw;
+  color: red;
+
 }
 
 .mistakes{
-color:  rgb(34, 32, 32);
+color:  red;
 font-size: 2vw;
-margin: 0.3vh;
+margin: 0;
+
 }
 .mistakes span {
   color:  rgb(219, 202, 202);
@@ -304,7 +307,9 @@ margin: 0.3vh;
   justify-content: center;
   color:  white;
   font-size: 70px;
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/047/727/975/small_2x/the-end-gold-glitch-text-effect-cinematic-title-abstract-backgroud-video.jpg');
   z-index: -2;
+  background-size: cover;
 }
 
 #videoPlayer{
@@ -320,13 +325,13 @@ margin: 0.3vh;
   width: 100vw;
   height: 100vh;
   background-color: green;
-  z-index: -1;
+ 
   display: flex;
   align-items: center;
   justify-content: center;
   color:  white;
   font-size: 70px;
-  z-index: -2;
+  z-index: -1;
 }
 #goInside{
   position: absolute;
@@ -375,11 +380,11 @@ margin: 0.3vh;
   <div id="wrongAnswer">WRONG ANSWER</div>
 </div>
 
-<div id="revew">REVEW <br> </div>
+<div id="revew"></div>
 
 <video id="videoPlayer" controls ></video>
 
-<div id="theEnd">THE END</div>
+<div id="theEnd"></div>
 <script>
 const answerdata = {
 77: "distinction",
@@ -551,11 +556,12 @@ let stopNumber = 4;
 let videoNumb = 65
 let right = 0;
 let turn = 1;
-let videoSequence = [ ];
+let videoSequence = [1,2,3,4,5,6,7,8,9,10,11];
 
 
 let finish = 0;
 let dd = firstArray[0]
+
 
 
 function playVideosSequentially(videoList) {
@@ -565,6 +571,7 @@ function playVideosSequentially(videoList) {
     const playNext = () => {
       if (currentIndex < videoList.length) {
         const videoSrc = `./answers/answer${videoList[currentIndex]}.mp4`;
+        startButton.innerText = videoList[currentIndex]
         videoPlayer.src = videoSrc;
 
         // Wait until the video metadata is loaded before trying to play
@@ -592,7 +599,7 @@ function playVideosSequentially(videoList) {
 
   revew.style.zIndex = "4";
   let procents = 100 - (65 / 100) * videoSequence.length;
-  let trezz = `<div id="revweList"> <p id="reviewTitle">REVEW  <span>${videoSequence.length}</span></p> <div> <p id = "procent"> ${Math.round(procents)} %  <p/>`;
+  let trezz = `<div id="revweList">  <div> <p id = "procent"> ${Math.round(procents)} %  <p/>`;
   videoSequence.forEach(element => {
     trezz = trezz + `<p class="mistakes"><span>${element}.</span> ${answerdata[element]}</p> `;
   });
