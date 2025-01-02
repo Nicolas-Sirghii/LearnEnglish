@@ -280,20 +280,22 @@ margin: 0;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('https://png.pngtree.com/png-vector/20240407/ourmid/pngtree-wrong-sign-incorrect-symbol-vector-png-image_12267047.png');
+  background-size: contain;
   
 }
 #rightAnswer{
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background-color: green;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("https://cdn.pixabay.com/photo/2013/07/13/10/06/affirmative-156538_640.png");
+  background-size: contain;
  
 }
 #theEnd{
@@ -374,10 +376,10 @@ margin: 0;
 
 
 <div id="RightContainer">
-  <div id="rightAnswer">RIGHT ANSWER</div>
+  <div id="rightAnswer"></div>
 </div>
 <div id="WrongContainer">
-  <div id="wrongAnswer">WRONG ANSWER</div>
+  <div id="wrongAnswer"></div>
 </div>
 
 <div id="revew"></div>
@@ -387,6 +389,14 @@ margin: 0;
 <div id="theEnd"></div>
 <script>
 const answerdata = {
+  85: "advisory",
+  84: "gush",
+  83: "flash",
+  82: "mid",
+  81: "pump",
+  80: "sinkhole",
+  79: "mine shaft",
+  78: "spike",
 77: "distinction",
 76: "forecast",
 75: "anchore",
@@ -556,7 +566,7 @@ let stopNumber = 4;
 let videoNumb = 65
 let right = 0;
 let turn = 1;
-let videoSequence = [1,2,3,4,5,6,7,8,9,10,11];
+let videoSequence = [];
 
 
 let finish = 0;
