@@ -418,13 +418,13 @@ const answerdata = {
   // 129: "gavel",
   // 128: "retain",
   // 127: "revolt",
-  // 126: "capitol hill",
-  // 125: "disdain",
-  // 124: "hush money",
-  // 123: "ied",
-  // 122: "explosive",
-  // 121: "half-brother",
-  // 120: "radicalized",
+  126: "capitol hill",
+  125: "disdain",
+  124: "hush money",
+  123: "ied",
+  122: "explosive",
+  121: "half-brother",
+  120: "radicalized",
    119: "copycat",
    118: "bulletin",
    117: "decorate",
@@ -439,7 +439,6 @@ const answerdata = {
    108: "predispose",
    107: "flock",
    106: "underlying",
-
   105: "contract",
   104: "flu",
   103: "counter",
@@ -517,7 +516,7 @@ const answerdata = {
 31: "finalize",
 30: "safe haven",
 29: "manger",
-28: "I'm focused",
+28: "i'm focused",
 27: "amid",
 26: "congregants",
 25: "nativity",
@@ -638,6 +637,7 @@ let videoNumb = 65
 let right = 0;
 let turn = 1;
 let videoSequence = [];
+let afirmations = [15,16,18,22,28];
 
 
 let finish = 0;
@@ -1012,7 +1012,8 @@ input.addEventListener('keypress', event => {
                     
                     if (videoSequence.length > 0) {
                       videoPlayer.style.zIndex = "3"
-                      playVideosSequentially(videoSequence);
+                      const comi = [...videoSequence, ...afirmations];
+                      playVideosSequentially(comi);
                     } else {
                       theEnd.style.zIndex = "4"
                     }
