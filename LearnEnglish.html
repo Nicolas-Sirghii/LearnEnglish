@@ -100,6 +100,22 @@
   background-color:  transparent;
   
 }
+#hintNumb {
+position: absolute;
+top: 10vw;
+left: 8vw;
+  color: red;
+  font-size: 3vw;
+
+
+}
+#mistakesNum{
+  position: absolute;
+  top: 10vw;
+  right: 8vw;
+  font-size: 3vw;
+  color: red;
+}
 
 .divplace{
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -350,6 +366,8 @@ margin: 0;
 <body>
   <div id="backgroundInfo">
     <div id="hint">Tab</div>
+    <div id="hintNumb">no hints spent</div>
+    <div id="mistakesNum">no mistakes made</div>
     <div id="mainContainer">
       
         <div id="firstCont" class="container"></div>
@@ -363,6 +381,7 @@ margin: 0;
     <input id="input" type="text" placeholder="Type" >
     </form>
     <button id="start">START</button>
+    
 </div>
 <video id="VideoAnswer" controls = "controls"  autoplay="autoplay">
   <source  type="video/mp4"/>
@@ -389,6 +408,13 @@ margin: 0;
 <div id="theEnd"></div>
 <script>
 const answerdata = {
+  // 162: "entrepreneurship",
+  // 161: "channel",
+  // 160: "blend",
+  // 159: "keep tabs",
+  // 158: "pay off",
+  // 157: "fuel",
+  // 156: "enhance",
   // 155: "pitfall",
   // 154: "dodge",
   // 153: "comprehend",
@@ -627,6 +653,9 @@ const theEnd = document.getElementById('theEnd');
 const videoFolder = './answers/';
 const hint = document.getElementById("hint");
 
+const hee = document.getElementById('hintNumb');
+const miss = document.getElementById('mistakesNum');
+
 
 
 
@@ -638,10 +667,32 @@ let right = 0;
 let turn = 1;
 let videoSequence = [];
 let afirmations = [15,16,18,22,28];
+let hintNumb = 0;
 
 
 let finish = 0;
 let dd = firstArray[0]
+document.addEventListener("keydown", function(event) {
+   
+    if (event.key === "`") {
+      videoQuestion.src = `./questions/question${dd}.mp4`
+  videoQuestion.style.zIndex = '3';
+   videoAnswer.style.zIndex = '-1';
+   information.style.zIndex = '-1';
+   
+   videoQuestion.addEventListener('ended',() => {
+  
+  
+startButton.innerText = dd
+    videoQuestion.style.zIndex = '-4';
+    information.style.zIndex = '1';
+   controls.style.zIndex = "3"
+   
+    })
+    hee.innerText = `hints spent : ${hintNumb}`
+    }
+});
+
 
 
 
@@ -1092,6 +1143,7 @@ input.addEventListener('keypress', event => {
             function addUniqueNumber(array, number) {
               if (!array.includes(number)) {
                 array.push(number);
+                miss.innerText = `mistakes : ${videoSequence.length}`
               }
             }
             addUniqueNumber(videoSequence , aa[aa.length-2] )
@@ -1126,7 +1178,8 @@ document.addEventListener('keydown', function(event) {
 
      
    // Focus on the input field
-   
+   hintNumb++
+   hee.innerText = `hints spent:${hintNumb}`
   }
   input.focus(); 
   
