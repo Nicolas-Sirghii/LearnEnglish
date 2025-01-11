@@ -5,6 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LearnEnglish</title>
   <style>
+     #chooseContainer {
+      position: absolute;
+      width: 100vw;
+      height:  100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #3b3434;
+            font-family: Arial, sans-serif;
+        }
+
+        .circle-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ccc;
+            cursor: pointer;
+            position: relative;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .circle.plus {
+            background-color: #aaa;
+        }
+
+        .circle-name {
+            position: absolute;
+            top: 100px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #popup, #edit-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            display: none;
+        }
+
+        #popup input, #edit-popup input {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #popup button, #edit-popup button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #popup button:hover, #edit-popup button:hover {
+            background-color: #0056b3;
+        }
+
+        #edit-popup h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        #edit-popup .delete {
+            background-color: #FF0000;
+            margin-left: 10px;
+        }
+
+        #edit-popup .delete:hover {
+            background-color: #cc0000;
+        }
+        #run{
+          font-size: 2vw;
+          width: 40%;
+          
+        }
     body {
   margin: 0;
   color: white;
@@ -128,7 +225,7 @@ left: 8vw;
   background-image: url('https://cdn-icons-png.flaticon.com/512/15359/15359865.png');
 }
 
-button {
+#start {
   cursor: pointer;
   position: absolute;
   width: 4vw; /* The width of the hexagon */
@@ -141,7 +238,7 @@ button {
     align-items: center;
     justify-content: center;
     border: none;
-    font-size: 0.6vw;
+    font-size: 1vw;
 
 }
 .startStop{
@@ -366,8 +463,8 @@ margin: 0;
 <body>
   <div id="backgroundInfo">
     <div id="hint">Tab</div>
-    <div id="hintNumb">no hints spent</div>
-    <div id="mistakesNum">no mistakes made</div>
+    <div id="hintNumb">no hints used</div>
+    <div id="mistakesNum">no mistakes</div>
     <div id="mainContainer">
       
         <div id="firstCont" class="container"></div>
@@ -406,174 +503,52 @@ margin: 0;
 <video id="videoPlayer" controls ></video>
 
 <div id="theEnd"></div>
+<div id="chooseContainer">
+  <div class="circle-container">
+    <div class="circle plus" id="add-circle">+</div>
+</div>
+
+<div id="popup">
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="image" placeholder="Image URL">
+    <input type="text" id="question" placeholder="Answers">
+    <input type="text" id="answer" placeholder="path/ans/ques">
+    <button id="add-button">Add</button>
+</div>
+
+<div id="edit-popup">
+    <h3 id="update-message"></h3>
+    <input type="text" id="begining" placeholder="begining">
+    <input type="text" id="end" placeholder="end">
+    <input type="text" id="edit-name" placeholder="Name">
+    <input type="text" id="edit-image" placeholder="Image URL">
+    <input type="text" id="edit-question" placeholder="Answers">
+    <input type="text" id="edit-answer" placeholder="path/ans/ques">
+    <button class="delete" id="delete-button">Delete</button>
+    <button id="update-button">Update</button>
+    <button id="run">Run</button>
+</div>
+
+</div>
 <script>
-const answerdata = {
-  // 162: "entrepreneurship",
-  // 161: "channel",
-  // 160: "blend",
-  // 159: "keep tabs",
-  // 158: "pay off",
-  // 157: "fuel",
-  // 156: "enhance",
-  // 155: "pitfall",
-  // 154: "dodge",
-  // 153: "comprehend",
-  // 152: "vital",
-  // 151: "multifaceted",
-  // 150: "pledge",
-  // 149: "outrage",
-  // 148: "swear in",
-  // 147: "as a whole",
-  // 146: "blast",
-  // 145: "felony",
-  // 144: "swath",
-  // 143: "streak",
-  // 142: "precursor",
-  // 141: "coast",
-  // 140: "compound",
-  // 139: "vigilant",
-  // 138: "unconditional",
-  // 137: "infidelity",
-  // 136: "burden",
-  // 135: "spectacle",
-  // 134: "terminally",
-  // 133: "excerpt",
-  // 132: "beret",
-  // 131: "animosity",
-  // 130: "rail",
-  // 129: "gavel",
-  // 128: "retain",
-  // 127: "revolt",
-  126: "capitol hill",
-  125: "disdain",
-  124: "hush money",
-  123: "ied",
-  122: "explosive",
-  121: "half-brother",
-  120: "radicalized",
-   119: "copycat",
-   118: "bulletin",
-   117: "decorate",
-   116: "cybertruck",
-   115: "intervene",
-   114: "pacifier",
-   113: "discharge",
-   112: "premature",
-   111: "triplet",
-   110: "bank",
-   109: "odds",
-   108: "predispose",
-   107: "flock",
-   106: "underlying",
-  105: "contract",
-  104: "flu",
-  103: "counter",
-  102: "editorial",
-  101: "menace",
-  100: "mar",
-  99: "rhetoric",
-  98: "surge",
-  97: "swatting",
-  96: "hypothermia",
-  95: "pummel",
-  94: "ramp up",
-  93: "escalation",
-  92: "condemn",
-  91: "houthis",
-  90: "housing",
-  89: "opposing briefs",
-  88: "dicey",
-  87: "precipitation",
-  86: "precept",
-  85: "advisory",
-  84: "gush",
-  83: "flash",
-  82: "mid",
-  81: "pump",
-  80: "sinkhole",
-  79: "mine shaft",
-  78: "spike",
-77: "distinction",
-76: "forecast",
-75: "anchore",
-74: "coverage",
-73: "fixture",
-72: "pioneer",
-71: "play by play voice",
-70: "nfl",
-69: "racetrack",
-68: "distinctive",
-67: "synonymous",
-66: "remarkable",
-65: "iconic",
-64: "court",
-63: "stoicism",
-62: "rigorous",
-61: "division",
-60: "pew",
-59: "gripe",
-58: "grumble",
-57: "undermine",
-56: "enroll",
-55: "pulpit",
-54: "denomination",
-53: "presbyterian",
-52: "enchilada",
-51: "glance",
-50: "novel",
-49: "preach",
-48: "moderation",
-47: "drastically",
-46: "deductible",
-45: "offramp",
-44: "inclusivity",
-43: "incorporate",
-42: "inroads",
-41: "sleep apnea",
-40: "obesity",
-39: "adolescent",
-38: "dole out",
-37: "incentivize",
-36: "domestic production",
-35: "slap",
-34: "crosshairs",
-33: "make or break",
-32: "political gain",
-31: "finalize",
-30: "safe haven",
-29: "manger",
-28: "i'm focused",
-27: "amid",
-26: "congregants",
-25: "nativity",
-24: "pilgrim",
-23: "raging",
-22: "they come true",
-21: "well worn",
-20: "somber",
-19: "chapel",
-18: "joyful and free",
-17: "jubilee",
-16: "new strategies",
-15: "success",
-14: "heartfelt",
-13: "accessible",
-12: "wheel well",
-11: "collide",
-10: "footage",
-9: "wreckage",
-8: "flip",
-7: "recover",
-6: "reportedly",
-5: "monitor",
-4: "connect the dots",
-3: "impact",
-2: "wreck",
-1: "remarkably",
+  const chooseContainer = document.getElementById("chooseContainer")
+  const begining = document.getElementById("begining")
+  const end = document.getElementById("end")
 
+  
+   
+  begining.placeholder = "begining"
+  end.placeholder = "end"
 
+const MainFunction = (arr , patt , from , to) => {
+if (arr && Object.keys(arr).length > 70) {
+  
+  const pathThrough = patt
+  let incheput = from;
+  let sfirsit = to;
 
-};
+  
+answerdata = arr
 // Main arrays
 let firstArray = [];
 let secondArray = [];
@@ -589,27 +564,56 @@ if (number < 33) {
 const createDescendingArray = (start, length) =>
   Array.from({ length }, (_, i) => start - i);
 
-// Helper function to generate a shuffled range of numbers
-const generateShuffledRange = (size) =>
-  Array.from({ length: size }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+
+const generateThreeUniqueArrays = (beginning, end) => {
+    const totalNumbers = end - beginning + 1; // Total range of numbers
+    const arrayLengths = [22, 7, 2]; // Lengths of the three arrays
+
+    // Check if the range is sufficient for the required numbers
+    const requiredNumbers = arrayLengths.reduce((a, b) => a + b, 0);
+    if (totalNumbers < requiredNumbers) {
+        throw new Error("Not enough unique numbers in the given range.");
+    }
+
+    // Step 1: Generate the range of numbers
+    const range = Array.from({ length: totalNumbers }, (_, i) => beginning + i);
+
+    // Step 2: Shuffle the range
+    const shuffled = range.sort(() => Math.random() - 0.5);
+
+    // Step 3: Split the shuffled array into three arrays
+    const result = [];
+    let index = 0;
+    for (let length of arrayLengths) {
+        result.push(shuffled.slice(index, index + length));
+        index += length;
+    }
+
+    return result;
+}
+
+
 
 // Helper function to combine and shuffle arrays, ensuring no zeros
 const combineAndShuffleArrays = (arr1, arr2) =>
   [...arr1, ...arr2].filter((num) => num !== 0).sort(() => Math.random() - 0.5);
 
+
+  
 // Generate fixed arrays
-const firstArrayFixed = createDescendingArray(number, 3);
-const secondArrayFixed = createDescendingArray(number, 8);
-const thirdArrayFixed = createDescendingArray(number, 23);
+const firstArrayFixed = createDescendingArray(sfirsit, 3);
+const secondArrayFixed = createDescendingArray(sfirsit, 8);
+const thirdArrayFixed = createDescendingArray(sfirsit, 23);
 
 // Adjust number for remaining random arrays
 const remainingNumber = number - 23;
 
 // Generate shuffled arrays
-const shuffledRange = generateShuffledRange(remainingNumber);
-const firstArrayRandom = shuffledRange.slice(0, 2);
-const secondArrayRandom = shuffledRange.slice(2, 9);
-const thirdArrayRandom = shuffledRange.slice(9, 31);
+  tram = sfirsit - 23
+const [array1, array2, array3] = generateThreeUniqueArrays(incheput, tram);
+const firstArrayRandom = array3;
+const secondArrayRandom = array2;
+const thirdArrayRandom = array1;
 
 // Combine fixed and random arrays, shuffle, and assign to main arrays
 firstArray = combineAndShuffleArrays(firstArrayRandom, firstArrayFixed);
@@ -702,7 +706,7 @@ function playVideosSequentially(videoList) {
 
     const playNext = () => {
       if (currentIndex < videoList.length) {
-        const videoSrc = `./answers/answer${videoList[currentIndex]}.mp4`;
+        const videoSrc = `${pathThrough}/answers/answer${videoList[currentIndex]}.mp4`;
         startButton.innerText = videoList[currentIndex]
         videoPlayer.src = videoSrc;
 
@@ -760,7 +764,7 @@ startButton.addEventListener('click', () => {
                     
                   
 
-  videoQuestion.src = `./questions/question${dd}.mp4`
+  videoQuestion.src = `${pathThrough}/questions/question${dd}.mp4`
   videoQuestion.style.zIndex = '3';
    videoAnswer.style.zIndex = '-1';
    information.style.zIndex = '-1';
@@ -1021,7 +1025,7 @@ input.addEventListener('keypress', event => {
                finish ++
 
           
-          videoAnswer.src = `./answers/answer${dd}.mp4`
+          videoAnswer.src = `${pathThrough}/answers/answer${dd}.mp4`
           videoAnswer.style.zIndex = '3';
           information.style.zIndex = '-1';
          
@@ -1033,7 +1037,7 @@ input.addEventListener('keypress', event => {
                       videoAnswer.style.zIndex = '-1';
                       videoQuestion.style.zIndex = '3';
                       information.style.zIndex = "-1"
-                     videoQuestion.src = `./questions/question${dd}.mp4`
+                     videoQuestion.src = `${pathThrough}/questions/question${dd}.mp4`
                      
                      let seeing = document.getElementById(`insede${dd}`)
                      
@@ -1127,7 +1131,7 @@ input.addEventListener('keypress', event => {
                 wrongAnswer.style.zIndex = "-1"
               }, 1000);
              
-            videoQuestion.src = `./questions/question${dd}.mp4`
+            videoQuestion.src = `${pathThrough}/questions/question${dd}.mp4`
             
             let seeing = document.getElementById(`insede${dd}`)
             let seeingPrev = document.getElementById(`insede${aa[aa.length - 2]}`)
@@ -1251,12 +1255,17 @@ createRedRoundDiv();
   a.style.opacity = "0.3"
   a.style.color = "transparent"
   a.style.backgroundColor = "white"
+  if (i === lenra -1) {
+    a.style.opacity = "1"
+  a.style.color = "transparent"
+  a.style.backgroundColor = "red"
+  }
   
  }
 
 thirdArray.forEach((elem , index)=>{
   const a = document.getElementById(`insede${elem}`);
-  if (elem == lenra - 22) {
+  if (elem == sfirsit - 22) {
     a.style.backgroundColor = "rgb(200, 91, 91)"
   a.style.opacity = "1"
   a.style.color = "wihite"
@@ -1265,6 +1274,7 @@ thirdArray.forEach((elem , index)=>{
   a.style.opacity = "1"
   a.style.color = "white"
   }
+ 
 })
 
 secondArray.forEach((elem)=>{
@@ -1279,6 +1289,253 @@ firstArray.forEach((elem)=>{
   a.style.opacity = "1"
   a.style.color = "white"
 })
+
+
+
+
+
+} else {
+
+ alert("something is wrong with the answers Data")
+}
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+const addCircle = document.getElementById('add-circle');
+        const popup = document.getElementById('popup');
+        const editPopup = document.getElementById('edit-popup');
+        const addButton = document.getElementById('add-button');
+        const updateButton = document.getElementById('update-button');
+        const deleteButton = document.getElementById('delete-button');
+        const circleContainer = document.querySelector('.circle-container');
+        const updateMessage = document.getElementById('update-message');
+        const run = document.getElementById('run');
+
+        let currentEditingCircle = null;
+
+        const loadCirclesFromLocalStorage = () => {
+            const circles = JSON.parse(localStorage.getItem('circles') || '[]');
+            circles.forEach(circleData => {
+                createCircleElement(circleData);
+            });
+        };
+
+        const saveCirclesToLocalStorage = () => {
+            const circles = Array.from(circleContainer.querySelectorAll('.circle:not(.plus)')).map(circle => {
+                return {
+                    name: circle.dataset.name,
+                    image: circle.dataset.image,
+                    question: circle.dataset.question,
+                    answer: circle.dataset.answer,
+                    updatedDate: circle.dataset.updatedDate
+                };
+            });
+            localStorage.setItem('circles', JSON.stringify(circles));
+        };
+
+        const createCircleElement = (data) => {
+            const { name, image, question, answer, updatedDate } = data;
+            const newCircle = document.createElement('div');
+            newCircle.classList.add('circle');
+
+            if (image.trim() !== '') {
+                newCircle.style.backgroundImage = `url(${image})`;
+            } else {
+                newCircle.style.backgroundColor = 'blue';
+            }
+
+            const nameLabel = document.createElement('div');
+            nameLabel.classList.add('circle-name');
+            nameLabel.textContent = name;
+
+            newCircle.appendChild(nameLabel);
+            circleContainer.insertBefore(newCircle, addCircle);
+
+            newCircle.dataset.name = name;
+            newCircle.dataset.image = image;
+            newCircle.dataset.question = question;
+            newCircle.dataset.answer = answer;
+            newCircle.dataset.updatedDate = updatedDate || 'Never';
+
+            newCircle.addEventListener('click', () => {
+             
+                currentEditingCircle = newCircle;
+
+
+                
+
+                if (localStorage.getItem(currentEditingCircle.dataset.name)) {
+                  end.placeholder = localStorage.getItem(currentEditingCircle.dataset.name)
+                } 
+                if (localStorage.getItem(currentEditingCircle.dataset.name + "start")) {
+                  begining.placeholder = localStorage.getItem(currentEditingCircle.dataset.name + "start")
+                } 
+
+
+                document.getElementById('edit-name').value = newCircle.dataset.name;
+                document.getElementById('edit-image').value = newCircle.dataset.image;
+                document.getElementById('edit-question').value = newCircle.dataset.question;
+                document.getElementById('edit-answer').value = newCircle.dataset.answer;
+                updateMessage.textContent = `Updated: ${newCircle.dataset.updatedDate}`;
+                editPopup.style.display = 'block';
+            });
+        };
+
+        addCircle.addEventListener('click', () => {
+            popup.style.display = 'block';
+            
+        });
+
+        addButton.addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const image = document.getElementById('image').value;
+            const question = document.getElementById('question').value;
+            const answer = document.getElementById('answer').value;
+
+            if (name.trim() === '') {
+                alert('Name is required');
+                return;
+            }
+
+            const data = { name, image, question, answer, updatedDate: 'Never' };
+            createCircleElement(data);
+            saveCirclesToLocalStorage();
+
+            popup.style.display = 'none';
+            document.getElementById('name').value = '';
+            document.getElementById('image').value = '';
+            document.getElementById('question').value = '';
+            document.getElementById('answer').value = '';
+        });
+
+        updateButton.addEventListener('click', () => {
+            if (!currentEditingCircle) return;
+
+            
+
+            const updatedName = document.getElementById('edit-name').value;
+            const updatedImage = document.getElementById('edit-image').value;
+            const updatedQuestion = document.getElementById('edit-question').value;
+            const updatedAnswer = document.getElementById('edit-answer').value;
+
+            if (updatedName.trim() === '') {
+                alert('Name is required');
+                return;
+            }
+
+            currentEditingCircle.dataset.name = updatedName;
+            currentEditingCircle.dataset.image = updatedImage;
+            currentEditingCircle.dataset.question = updatedQuestion;
+            currentEditingCircle.dataset.answer = updatedAnswer;
+
+            currentEditingCircle.style.backgroundImage = updatedImage.trim() !== '' ? `url(${updatedImage})` : '';
+            currentEditingCircle.style.backgroundColor = updatedImage.trim() === '' ? 'blue' : '';
+            currentEditingCircle.querySelector('.circle-name').textContent = updatedName;
+
+            const now = new Date();
+            const updatedDate = now.toLocaleString();
+            currentEditingCircle.dataset.updatedDate = updatedDate;
+            updateMessage.textContent = `Updated: ${updatedDate}`;
+            
+
+            saveCirclesToLocalStorage();
+            editPopup.style.display = 'none';
+            currentEditingCircle.style.border = "4px solid green"
+        });
+        run.addEventListener('click',()=>{
+          editPopup.style.display = 'none';
+          const now = new Date();
+            const updatedDate = now.toLocaleString();
+            currentEditingCircle.dataset.updatedDate = updatedDate;
+            updateMessage.textContent = `Updated: ${updatedDate}`;
+           
+            
+
+            const parr = currentEditingCircle.dataset.answer
+
+            
+
+             try {
+              let jsonData = JSON.parse(currentEditingCircle.dataset.question);
+               const lungimea = Object.keys(jsonData).length;
+               incheput =  Number(begining.value)  
+              sfirsit = end. lungimea
+              if (end.value !== "") {
+                localStorage.setItem(currentEditingCircle.dataset.name, end.value);
+                
+                sfirsit = Number(end.value) 
+              }else{
+                if (localStorage.getItem(currentEditingCircle.dataset.name)) {
+                  sfirsit =  Number(localStorage.getItem(currentEditingCircle.dataset.name)) 
+                } else {
+                  sfirsit = lungimea
+                }
+                
+              }
+
+
+
+
+
+              if (begining.value !== "") {
+                localStorage.setItem(currentEditingCircle.dataset.name + "start", begining.value);
+                
+                incheput = Number(begining.value) 
+              }else{
+                if (localStorage.getItem(currentEditingCircle.dataset.name + "start")) {
+                  incheput =  Number(localStorage.getItem(currentEditingCircle.dataset.name + "start")) 
+                } else {
+                  incheput = 1
+                }
+                
+              }
+              
+              
+
+              
+              MainFunction(jsonData , parr , incheput , sfirsit)
+              chooseContainer.style.zIndex = "-5"
+        
+             } catch {
+              alert("Sorry somethint is wrong with the answers Data")
+              
+             }
+
+            
+            saveCirclesToLocalStorage();
+
+           
+            
+
+        })
+
+        deleteButton.addEventListener('click', () => {
+            if (!currentEditingCircle) return;
+
+            circleContainer.removeChild(currentEditingCircle);
+            currentEditingCircle = null;
+
+            saveCirclesToLocalStorage();
+            editPopup.style.display = 'none';
+        });
+
+        // Close the popups when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+
+            if (e.target === editPopup) {
+                editPopup.style.display = 'none';
+            }
+        });
+
+        // Load existing circles on page load
+        loadCirclesFromLocalStorage();
 
 </script>
 </body>
