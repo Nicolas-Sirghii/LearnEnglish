@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
   <title>LearnEnglish</title>
   <style>
      #chooseContainer {
@@ -15,6 +18,8 @@
             height: 100vh;
             margin: 0;
             background-color: #3b3434;
+            background-image: url("https://i.gifer.com/J4o.gif");
+            background-size: contain;
             font-family: Arial, sans-serif;
         }
 
@@ -48,7 +53,7 @@
             position: absolute;
             top: 100px;
             font-size: 14px;
-            color: #333;
+            color: red;
         }
 
         #popup, #edit-popup {
@@ -103,6 +108,7 @@
           
         }
     body {
+      box-sizing: border-box;
   margin: 0;
   color: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -120,7 +126,7 @@
 
 #mainContainer {
   padding: 0;
-    width: 150vh;
+    width: 180vh;
     height: 150vh;
     position: absolute;
     top: 0px;
@@ -142,7 +148,7 @@
   justify-content: center;
   overflow: hidden;
   background-color: black;
-  background-image: url("https://e0.pxfuel.com/wallpapers/276/944/desktop-wallpaper-high-resolution-sci-fi-landscape-full.jpg");
+  background-image: url("https://i.gifer.com/J4o.gif");
     background-repeat: no-repeat;
     background-size: cover;
   
@@ -204,6 +210,11 @@ left: 8vw;
   color: red;
   font-size: 3vw;
 
+  font-family: "Jersey 15", serif;
+  font-weight: 900;
+  font-style: normal;
+  
+
 
 }
 #mistakesNum{
@@ -212,10 +223,16 @@ left: 8vw;
   right: 8vw;
   font-size: 3vw;
   color: red;
+
+  font-family: "Jersey 15", serif;
+  font-weight: 900;
+  font-style: normal;
+  
 }
 
 .divplace{
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,16 +245,20 @@ left: 8vw;
 #start {
   cursor: pointer;
   position: absolute;
-  width: 4vw; /* The width of the hexagon */
-    height: 4.5vw; /* Adjust the height for a proper hexagon */
-    background-color: #4ddb34; /* Color of the hexagon */
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 3px solid red;
+  width: 4.6vw; /* The width of the hexagon */
+    height: 4.6vw; /* Adjust the height for a proper hexagon */
+   background-image: url("https://media1.giphy.com/media/3o7aD6ydPRgEPllYQM/giphy.gif?cid=6c09b9520aliljgjoblt4rb3refwmf14w6rhx11lv8onh1qz&ep=v1_gifs_search&rid=giphy.gif&ct=g");
+    /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
+    border-radius: 50%;
+    background-size: cover;
+    color: white;
     top: 1vw;
-    left: 47.8%;
+    left: 47.5%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
+
     font-size: 1vw;
 
 }
@@ -293,7 +314,7 @@ left: 8vw;
   height: 18%;
   position: relative;
 
-  opacity: 0.3;
+  opacity: 0.5;
 }
 #thirdCont{
   height: 29%;
@@ -306,7 +327,7 @@ left: 8vw;
   width: 100vw;
   min-height: 100vh;
 
-  background-image: url('https://upload.wikimedia.org/wikipedia/en/6/60/Review_%28TV_series%29.png');
+  background-image: url('https://media4.giphy.com/media/MQTF1uW0GTZoVsseXx/giphy.gif?cid=6c09b952zyamoxjcvujt0d6j4d8l8kl67d8f6vhxycyhvpzp&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g');
   background-size: cover;
  
   overflow: hidden;
@@ -319,6 +340,7 @@ left: 8vw;
 #reviewTitle span {
   font-size: 6vw;
   color:  red;
+  
   
 }
 #procent{
@@ -398,17 +420,21 @@ margin: 0;
   justify-content: center;
   background-image: url('https://png.pngtree.com/png-vector/20240407/ourmid/pngtree-wrong-sign-incorrect-symbol-vector-png-image_12267047.png');
   background-size: contain;
+  border-radius: 50%;
   
 }
 #rightAnswer{
-  width: 300px;
-  height: 300px;
+  width: 100vh;
+  height: 100vh;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("https://cdn.pixabay.com/photo/2013/07/13/10/06/affirmative-156538_640.png");
+  background-image: url("https://www.pngall.com/wp-content/uploads/13/Successful-Business.png");
   background-size: contain;
+  border-radius: 50%;
+  background-position: center;
+  
  
 }
 #theEnd{
@@ -422,9 +448,10 @@ margin: 0;
   justify-content: center;
   color:  white;
   font-size: 70px;
-  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/047/727/975/small_2x/the-end-gold-glitch-text-effect-cinematic-title-abstract-backgroud-video.jpg');
+  background-image: url('https://media3.giphy.com/media/69pKX6fv2QgTe/200w.gif?cid=82a1493bwtw66qr77f84z64uzk46qviu4wbnbkppv2ywti3o&ep=v1_gifs_related&rid=200w.gif&ct=g');
   z-index: -2;
   background-size: cover;
+  background-position: center;
 }
 
 #videoPlayer{
@@ -480,12 +507,12 @@ margin: 0;
     <button id="start">START</button>
     
 </div>
-<video id="VideoAnswer" controls = "controls"  autoplay="autoplay">
+<video id="VideoAnswer"   autoplay="autoplay">
   <source  type="video/mp4"/>
 </video>
 
 
-<video id="videoQuestion" controls = "controls"  autoplay="autoplay" width="530" height="300">
+<video id="videoQuestion"   autoplay="autoplay" width="530" height="300">
   <source  type="video/mp4"/>
 </video>
 
@@ -500,7 +527,7 @@ margin: 0;
 
 <div id="revew"></div>
 
-<video id="videoPlayer" controls ></video>
+<video id="videoPlayer"  ></video>
 
 <div id="theEnd"></div>
 <div id="chooseContainer">
@@ -648,6 +675,7 @@ const simpleRandom = document.getElementById('simple_random');
 const information = document.getElementById('mainContainer');
 const wrongAnswer = document.getElementById('WrongContainer');
 const rightAnswer = document.getElementById('RightContainer');
+const noRight = document.getElementById('wrongAnswer');
 const theForm = document.getElementById('form');
 const myInput = document.getElementById('input');
 const containerOne = document.getElementById('containerOne');
@@ -662,7 +690,7 @@ const miss = document.getElementById('mistakesNum');
 
 
 
-
+let aquratProcent = []
 let numbers = [];
 let countNumber = 0;
 let stopNumber = 4;
@@ -734,7 +762,17 @@ function playVideosSequentially(videoList) {
   }, 10000);
 
   revew.style.zIndex = "4";
-  let procents = 100 - (65 / 100) * videoSequence.length;
+  let ac = 0;
+  aquratProcent.forEach(element => {
+  const b = Number(element)
+  
+    ac += b
+
+  });
+
+  ac = ac / aquratProcent.length
+
+  let procents = ac;
   let trezz = `<div id="revweList">  <div> <p id = "procent"> ${Math.round(procents)} %  <p/>`;
   videoSequence.forEach(element => {
     trezz = trezz + `<p class="mistakes"><span>${element}.</span> ${answerdata[element]}</p> `;
@@ -921,7 +959,13 @@ let blueDivs = new Set();
 let aa = [];
 let prev = []
 const highlightDiv = (containerIndex, indexInContainer) => {
-  containers.forEach(container => container.forEach(div => div.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/15359/15359865.png')"
+  containers.forEach(container => container.forEach(div =>{
+   div.style.backgroundImage = "url('https://i.gifer.com/origin/a9/a9176696b8740c402d84b55374ea0107_w200.gif')"
+   div.style.backgroundPosition = "center"
+   div.style.backgroundSize = "cover"
+   div.style.border = "3px solid transparent";
+   
+  }
     
   ));
   const currentDiv = containers[containerIndex][indexInContainer];
@@ -929,7 +973,10 @@ const highlightDiv = (containerIndex, indexInContainer) => {
   dd = currentDiv.textContent
   prev.push(answerdata[dd])
   aa.push(dd)
-  currentDiv.style.backgroundImage = "url('https://c8.alamy.com/comp/H33XCA/target-black-isolated-crosshair-target-with-red-center-vector-illustration-H33XCA.jpg')"
+  currentDiv.style.backgroundImage = "url('https://i.gifer.com/embedded/download/OpOK.gif')"
+  currentDiv.style.backgroundPosition = "center"
+  currentDiv.style.backgroundPosition = "center"
+  currentDiv.style.border = "3px solid red"
   
   
 }
@@ -1011,7 +1058,13 @@ input.addEventListener('keypress', event => {
           currentDiv.style.backgroundColor = 'blue';
           const goInside = document.createElement("div")
           goInside.id = "goInside"
-             goInside.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6L2q1S0Ng2RBPjfX5Coafctnz0SUYKUA0Xw&s')"
+             goInside.style.backgroundImage = "url('https://i.imgflip.com/4cqsb8.gif')"
+             goInside.style.borderRadius = "50%"
+             goInside.style.backgroundPosition = "center"
+
+            
+             
+             
           currentDiv.appendChild(goInside)
           startButton.innerText = dd
           blueDivs.add(currentDiv);
@@ -1112,7 +1165,10 @@ input.addEventListener('keypress', event => {
           const goInside = document.createElement("div")
           goInside.id = "goInside"
           aa.push(answerdata[dd])
-          goInside.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6L2q1S0Ng2RBPjfX5Coafctnz0SUYKUA0Xw&s')"
+          goInside.style.backgroundImage = "url('https://i.imgflip.com/4cqsb8.gif')"
+          goInside.style.borderRadius = "50%"
+          goInside.style.backgroundPosition = "center"
+         
           currentDiv.appendChild(goInside)
 
 
@@ -1125,11 +1181,69 @@ input.addEventListener('keypress', event => {
 
       highlightDiv(currentContainerIndex, currentIndexInContainer);
 
+
+
+
           if (theWord !== prev[prev.length - 2]) {
+
+
+
+
+
+
+            function levenshteinDistance(a, b) {
+      const matrix = Array.from({ length: a.length + 1 }, () => []);
+
+      for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+      for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+      for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+          if (a[i - 1] === b[j - 1]) {
+            matrix[i][j] = matrix[i - 1][j - 1];
+          } else {
+            matrix[i][j] = Math.min(
+              matrix[i - 1][j - 1], // substitution
+              matrix[i][j - 1],     // insertion
+              matrix[i - 1][j]      // deletion
+            ) + 1;
+          }
+        }
+      }
+
+      return matrix[a.length][b.length];
+    }
+
+    // Function to calculate similarity percentage
+    function calculateSimilarity(a, b) {
+      const maxLength = Math.max(a.length, b.length);
+      if (maxLength === 0) return 100; // If both strings are empty, similarity is 100%
+      const distance = levenshteinDistance(a, b);
+      return ((1 - distance / maxLength) * 100).toFixed(2); // Return similarity percentage
+    }
+
+    // Function to check similarity and log to the console
+    function checkSimilarity() {
+
+      const similarity = calculateSimilarity(theWord, prev[prev.length - 2]);
+      noRight.innerText = `${similarity}%`
+      aquratProcent.push(similarity)
+      noRight.style.color = "green"
+      noRight.style.fontSize = "3vw"
+      noRight.style.fontWeight = "900"
+      
+    }
+
+
+     
+
+       checkSimilarity()
+
+
               wrongAnswer.style.zIndex = "4"
               setTimeout(() => {
                 wrongAnswer.style.zIndex = "-1"
-              }, 1000);
+              }, 2000);
              
             videoQuestion.src = `${pathThrough}/questions/question${dd}.mp4`
             
@@ -1193,7 +1307,7 @@ function createRedRoundDiv() {
   // Create the red round div
   const redDiv = document.createElement('div');
   redDiv.style.position = 'absolute';
-  redDiv.style.top = '-33%';
+  redDiv.style.top = '-33.5%';
   redDiv.style.left = '50%';
   redDiv.style.transform = 'translate(-50%, -50%)';
   redDiv.style.width = '90vh';
@@ -1355,18 +1469,26 @@ const addCircle = document.getElementById('add-circle');
             newCircle.appendChild(nameLabel);
             circleContainer.insertBefore(newCircle, addCircle);
 
-            newCircle.dataset.name = name;
+            
+                
+               
+              
+               
+
+
+            newCircle.dataset.name =   `${name}`;
             newCircle.dataset.image = image;
             newCircle.dataset.question = question;
+            
             newCircle.dataset.answer = answer;
             newCircle.dataset.updatedDate = updatedDate || 'Never';
+
+
+            
 
             newCircle.addEventListener('click', () => {
              
                 currentEditingCircle = newCircle;
-
-
-                
 
                 if (localStorage.getItem(currentEditingCircle.dataset.name)) {
                   end.placeholder = localStorage.getItem(currentEditingCircle.dataset.name)
@@ -1375,12 +1497,13 @@ const addCircle = document.getElementById('add-circle');
                   begining.placeholder = localStorage.getItem(currentEditingCircle.dataset.name + "start")
                 } 
 
-
+                 
+                let brumma = JSON.parse(newCircle.dataset.question)
                 document.getElementById('edit-name').value = newCircle.dataset.name;
                 document.getElementById('edit-image').value = newCircle.dataset.image;
                 document.getElementById('edit-question').value = newCircle.dataset.question;
                 document.getElementById('edit-answer').value = newCircle.dataset.answer;
-                updateMessage.textContent = `Updated: ${newCircle.dataset.updatedDate}`;
+                updateMessage.textContent = `Max (${Object.keys(brumma).length}): ${newCircle.dataset.updatedDate}`;
                 editPopup.style.display = 'block';
             });
         };
@@ -1391,6 +1514,9 @@ const addCircle = document.getElementById('add-circle');
         });
 
         addButton.addEventListener('click', () => {
+
+            
+             
             const name = document.getElementById('name').value;
             const image = document.getElementById('image').value;
             const question = document.getElementById('question').value;
@@ -1415,6 +1541,8 @@ const addCircle = document.getElementById('add-circle');
         updateButton.addEventListener('click', () => {
             if (!currentEditingCircle) return;
 
+            
+              
             
 
             const updatedName = document.getElementById('edit-name').value;
@@ -1457,7 +1585,12 @@ const addCircle = document.getElementById('add-circle');
 
             const parr = currentEditingCircle.dataset.answer
 
-            
+            let jsonData = JSON.parse(currentEditingCircle.dataset.question);
+            const lungimea = Object.keys(jsonData).length;
+               
+
+
+         
 
              try {
               let jsonData = JSON.parse(currentEditingCircle.dataset.question);
@@ -1465,9 +1598,20 @@ const addCircle = document.getElementById('add-circle');
                incheput =  Number(begining.value)  
               sfirsit = end. lungimea
               if (end.value !== "") {
-                localStorage.setItem(currentEditingCircle.dataset.name, end.value);
+
+                if (end.value > lungimea) {
+                  alert(`Sorry the end Must not be greater than ${lungimea} !!!`)
+                  location.reload();
+                }else{
+                  localStorage.setItem(currentEditingCircle.dataset.name, end.value);
+
                 
-                sfirsit = Number(end.value) 
+                
+                   sfirsit = Number(end.value) 
+                }
+
+
+               
               }else{
                 if (localStorage.getItem(currentEditingCircle.dataset.name)) {
                   sfirsit =  Number(localStorage.getItem(currentEditingCircle.dataset.name)) 
@@ -1476,16 +1620,32 @@ const addCircle = document.getElementById('add-circle');
                 }
                 
               }
-
-
-
-
-
+              
+              
+                
               if (begining.value !== "") {
+
+                
+                if (begining.value < 1 ) {
+                  alert(`Sorry , The begining (${begining.value}) must not be less than 1 !!`)
+                  location.reload();
+
+
+            }
+            
+            
                 localStorage.setItem(currentEditingCircle.dataset.name + "start", begining.value);
                 
                 incheput = Number(begining.value) 
               }else{
+
+
+
+
+
+
+
+                
                 if (localStorage.getItem(currentEditingCircle.dataset.name + "start")) {
                   incheput =  Number(localStorage.getItem(currentEditingCircle.dataset.name + "start")) 
                 } else {
@@ -1501,10 +1661,16 @@ const addCircle = document.getElementById('add-circle');
               chooseContainer.style.zIndex = "-5"
         
              } catch {
-              alert("Sorry somethint is wrong with the answers Data")
+              if ((sfirsit - incheput ) < 55) {
+               alert(`Sorry the gap between the begining (${incheput}) and the end (${sfirsit}) is less than is allowed (53)`)
+                }
+
+
+              
               
              }
-
+              
+            
             
             saveCirclesToLocalStorage();
 
