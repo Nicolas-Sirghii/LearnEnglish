@@ -483,6 +483,22 @@ margin: 0;
   width: 100%;
   margin-right: 15%;
 }
+.the_time_spent{
+  position: absolute;
+  bottom: 3vh;
+  left: 3vw;
+  color: red;
+  font-size: 3vh;
+ 
+ 
+}
+.didItStarted{
+  position: absolute;
+  bottom: 8vh;
+  left: 3vw;
+color: red;
+
+}
 
 
   </style>
@@ -492,6 +508,8 @@ margin: 0;
     <div id="hint">Tab</div>
     <div id="hintNumb">no hints used</div>
     <div id="mistakesNum">no mistakes</div>
+    <div class="didItStarted"></div>
+    <div class="the_time_spent"></div>
     <div id="mainContainer">
       
         <div id="firstCont" class="container"></div>
@@ -538,7 +556,7 @@ margin: 0;
 <div id="popup">
     <input type="text" id="name" placeholder="Name">
     <input type="text" id="image" placeholder="Image URL">
-    <input type="text" id="question" placeholder="Answers">
+    <input type="text" id="question" placeholder='e.g., {"key": "value"}'>
     <input type="text" id="answer" placeholder="path/ans/ques">
     <button id="add-button">Add</button>
 </div>
@@ -555,19 +573,76 @@ margin: 0;
     <button id="update-button">Update</button>
     <button id="run">Run</button>
 </div>
-
+<div class="didItStarted" id="lasero"></div>
+<div class="the_time_spent" id="totalisimo"></div>
 </div>
 <script>
   const chooseContainer = document.getElementById("chooseContainer")
   const begining = document.getElementById("begining")
   const end = document.getElementById("end")
 
+
+
+
+        const leftBelow = document.querySelector(".the_time_spent")
+        const didItStarted = document.querySelector(".didItStarted")
+        const lasero = document.getElementById("lasero")
+        const totalisimo = document.getElementById("totalisimo")
+
+      // Retrieve the stored total time from local storage or initialize it to 0
+      let totalTime = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
+      let timeLast = parseInt(localStorage.getItem("timeSpentLastTime")) || 0;
+
+       let JustOnce = true;
+
+
+
+      function convertTotalTime() {
+            
+            const totalSeconds = parseInt(totalTime, 10);
+            const days = Math.floor(totalSeconds / (24 * 3600));
+            const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+                leftBelow.innerText = `Total: ${days} days: ${hours} hours: ${minutes} minutes: ${seconds} seconds`;
+                totalisimo.innerText = `Total: ${days} days: ${hours} hours: ${minutes} minutes: ${seconds} seconds`;
+        }
+
+        function convertLastTime() {
+            
+            const totalSeconds = parseInt(timeLast, 10);
+            const days = Math.floor(totalSeconds / (24 * 3600));
+            const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            lasero.innerText = `Prev: ${hours} hours: ${minutes} minutes: ${seconds} seconds`;
+            didItStarted.innerText = `Prev: ${hours} hours: ${minutes} minutes: ${seconds} seconds`;
+                
+               JustOnce = false;
+        }
+  
+        
+          convertTotalTime();
+          convertLastTime();
+       
+        
+  startTime = null;
   
    
   begining.placeholder = "begining"
   end.placeholder = "end"
+  let the_path_to = '';
 
-const MainFunction = (arr , patt , from , to) => {
+  let nameOfRithtNow = ''
+  let lenthOfRithNow = 0;
+  let procentOfRithtNow = 0;
+  let secondsOfRithtNow = 0;
+
+ 
+
+const MainFunction = (arr , patt , from , to) => { 
 if (arr && Object.keys(arr).length > 70) {
   
   const pathThrough = patt
@@ -707,7 +782,9 @@ let dd = firstArray[0]
 document.addEventListener("keydown", function(event) {
    
     if (event.key === "`") {
-      videoQuestion.src = `./questions/question${dd}.mp4`
+
+    console.log("yes")
+      videoQuestion.src = `${the_path_to}/questions/question${dd}.mp4`
   videoQuestion.style.zIndex = '3';
    videoAnswer.style.zIndex = '-1';
    information.style.zIndex = '-1';
@@ -753,6 +830,63 @@ function playVideosSequentially(videoList) {
             setTimeout(playNext, 1000); // 1-second delay
           } else {
             theEnd.style.zIndex = "4";
+           
+            const leftBelow = document.querySelector(".the_time_spent")
+        const didItStarted = document.querySelector(".didItStarted")
+        
+        
+      
+      
+      // Stop button event listener
+      
+        if (startTime !== null) {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000); // Calculate elapsed time in seconds
+          totalTime += elapsed; // Add elapsed time to the total
+          localStorage.setItem("totalTimeSpent", totalTime);
+          localStorage.setItem("timeSpentLastTime", elapsed) // Update local storage
+          leftBelow.innerText = totalTime; // Update the displayed total time
+          startTime = null;
+           // Reset start time
+           didItStarted.innerText = `Timer stopped. Elapsed: ${elapsed} seconds.`
+        } else {
+          console.log("Timer is not running.");
+        }
+
+
+        const store_Graph = ( name , length , procent , seconds)=>{
+
+      
+
+let a = {}
+
+if (localStorage.getItem(`${name}_graph`)) {
+   a = JSON.parse(localStorage.getItem(`${name}_graph`))
+   a[Object.keys(a).length + 1] = [length, procent   , seconds ]
+   localStorage.setItem(`${name}_graph`, JSON.stringify(a))
+}else{
+  localStorage.setItem(`${name}_graph`, JSON.stringify({1: [length, procent   , seconds ]}))
+  a = {1: [length, procent   , seconds ]}
+}
+console.log(a) 
+}
+store_Graph( nameOfRithtNow, lenthOfRithNow , procentOfRithtNow , secondsOfRithtNow )
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           }
         };
       }
@@ -770,10 +904,40 @@ function playVideosSequentially(videoList) {
 
   });
 
-  ac = ac / aquratProcent.length
+   const arca = Math.round(ac / aquratProcent.length) 
 
-  let procents = ac;
-  let trezz = `<div id="revweList">  <div> <p id = "procent"> ${Math.round(procents)} %  <p/>`;
+   let secontra = 0;
+
+
+   const calculateGeneralAccuracy = (mistakes, accuracyPerMistake, questionsAmount) => {
+    // Convert accuracyPerMistake from an integer percentage to a decimal
+    var accuracyDecimal = accuracyPerMistake / 100;
+    
+    // Calculate the number of correct answers
+    var correctAnswers = questionsAmount - mistakes;
+    
+    // Calculate the partial accuracy from the mistakes
+    var partialAccuracy = mistakes * accuracyDecimal;
+    
+    // Calculate the general accuracy
+    var generalAccuracy = ((correctAnswers + partialAccuracy) / questionsAmount) * 100;
+    
+    
+    secontra = Math.round(generalAccuracy)
+}
+
+// Example usage:
+calculateGeneralAccuracy(aquratProcent.length, arca, 55);
+
+
+const finalisation = Math.round((arca + secontra) / 2) ;
+
+procentOfRithtNow = finalisation
+
+
+
+  
+  let trezz = `<div id="revweList">  <div> <p id = "procent"> ${finalisation} %  <p/>`;
   videoSequence.forEach(element => {
     trezz = trezz + `<p class="mistakes"><span>${element}.</span> ${answerdata[element]}</p> `;
   });
@@ -1514,7 +1678,7 @@ const addCircle = document.getElementById('add-circle');
         });
 
         addButton.addEventListener('click', () => {
-
+          
             
              
             const name = document.getElementById('name').value;
@@ -1526,8 +1690,30 @@ const addCircle = document.getElementById('add-circle');
                 alert('Name is required');
                 return;
             }
+            if (question.trim() === '') {
+                alert('JSON DATA is required');
+                return;
+            }
+            let validOrNot = true;
+            try {
+              JSON.parse(question)
+            } catch (error) {
+              validOrNot = false;
+            }
+            if ( Object.keys(JSON.parse(question)).length < 55) {
+                alert('JSON DATA lenth must be at least 55 keys !!');
+                return;
+            }
 
-            const data = { name, image, question, answer, updatedDate: 'Never' };
+
+
+            if (!validOrNot) {
+              alert(`invalid JSON !! exemple of required structure:   {"1": "text", "2": "text"}`);
+              return;
+            }
+
+        
+        const data = { name, image, question, answer, updatedDate: 'Never' };
             createCircleElement(data);
             saveCirclesToLocalStorage();
 
@@ -1536,6 +1722,8 @@ const addCircle = document.getElementById('add-circle');
             document.getElementById('image').value = '';
             document.getElementById('question').value = '';
             document.getElementById('answer').value = '';
+
+
         });
 
         updateButton.addEventListener('click', () => {
@@ -1572,9 +1760,48 @@ const addCircle = document.getElementById('add-circle');
 
             saveCirclesToLocalStorage();
             editPopup.style.display = 'none';
-            currentEditingCircle.style.border = "4px solid green"
+           
         });
         run.addEventListener('click',()=>{
+
+
+          const leftBelow = document.querySelector(".the_time_spent")
+        const didItStarted = document.querySelector(".didItStarted")
+      
+
+      // Retrieve the stored total time from local storage or initialize it to 0
+      let totalTime = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
+      let timeLast = parseInt(localStorage.getItem("timeSpentLastTime")) || 0;
+     
+      
+      // Startc button event listener
+      
+        didItStarted.style.color = "white"
+        if (startTime === null) {
+          startTime = Date.now(); // Store the current timestamp
+          
+          console.log("Timer started.");
+        } else {
+          console.log("Timer is already running.");
+        }
+      
+        
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
           editPopup.style.display = 'none';
           const now = new Date();
             const updatedDate = now.toLocaleString();
@@ -1585,8 +1812,15 @@ const addCircle = document.getElementById('add-circle');
 
             const parr = currentEditingCircle.dataset.answer
 
+            the_path_to = parr
+
+            
+
             let jsonData = JSON.parse(currentEditingCircle.dataset.question);
             const lungimea = Object.keys(jsonData).length;
+
+            nameOfRithtNow = currentEditingCircle.dataset.name;
+            lenthOfRithNow = Object.keys(jsonData).length;
                
 
 
@@ -1702,6 +1936,23 @@ const addCircle = document.getElementById('add-circle');
 
         // Load existing circles on page load
         loadCirclesFromLocalStorage();
+
+
+       
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>
