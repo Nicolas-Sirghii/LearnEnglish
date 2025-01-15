@@ -448,7 +448,7 @@ margin: 0;
   justify-content: center;
   color:  white;
   font-size: 70px;
-  background-image: url('https://media3.giphy.com/media/69pKX6fv2QgTe/200w.gif?cid=82a1493bwtw66qr77f84z64uzk46qviu4wbnbkppv2ywti3o&ep=v1_gifs_related&rid=200w.gif&ct=g');
+  background-image: url('https://images.pexels.com/photos/15221698/pexels-photo-15221698.jpeg?cs=srgb&dl=pexels-ann-h-45017-15221698.jpg&fm=jpg');
   z-index: -2;
   background-size: cover;
   background-position: center;
@@ -500,6 +500,58 @@ color: red;
 
 }
 
+.graph-container {
+          width: 100vw;
+          height: 97vh;
+            position: relative;
+            border: 1px solid #ccc;
+            
+          
+            padding: 10px;
+        }
+
+        .bar {
+            position: absolute;
+            background-color: #4caf50;
+            border: 1px solid #388e3c;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            color: white;
+            font-size: 12px;
+           
+        }
+        #timeBar {
+            width: 33%;
+            background-color: rgb(22, 104, 131);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+        }
+        #barInside{
+            width: 33%;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: grey;
+        }
+        #everage{
+          position: absolute;
+          bottom: 20px;
+          left: 0;
+          width: 99%;
+          
+          border-top: 1px solid red;
+          z-index: 4;
+        }
+        #datatime{
+            position: absolute;
+            left: 1vw;
+            top: -2.5vh;
+            color: white;
+        }
+
 
   </style>
 </head>
@@ -547,7 +599,26 @@ color: red;
 
 <video id="videoPlayer"  ></video>
 
-<div id="theEnd"></div>
+<div id="theEnd">
+
+
+  <div id="graph" class="graph-container">
+    <div id="everage">
+       <div id="datatime"></div>
+    </div>
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+</div>
 <div id="chooseContainer">
   <div class="circle-container">
     <div class="circle plus" id="add-circle">+</div>
@@ -593,7 +664,7 @@ color: red;
       let totalTime = parseInt(localStorage.getItem("totalTimeSpent")) || 0;
       let timeLast = parseInt(localStorage.getItem("timeSpentLastTime")) || 0;
 
-       let JustOnce = true;
+       let JustOnce = {};
 
 
 
@@ -838,7 +909,7 @@ function playVideosSequentially(videoList) {
       
       
       // Stop button event listener
-      
+        let tratata = 0;
         if (startTime !== null) {
           const elapsed = Math.floor((Date.now() - startTime) / 1000); // Calculate elapsed time in seconds
           totalTime += elapsed; // Add elapsed time to the total
@@ -848,6 +919,7 @@ function playVideosSequentially(videoList) {
           startTime = null;
            // Reset start time
            didItStarted.innerText = `Timer stopped. Elapsed: ${elapsed} seconds.`
+           tratata = elapsed
         } else {
           console.log("Timer is not running.");
         }
@@ -860,30 +932,87 @@ function playVideosSequentially(videoList) {
 let a = {}
 
 if (localStorage.getItem(`${name}_graph`)) {
-   a = JSON.parse(localStorage.getItem(`${name}_graph`))
-   a[Object.keys(a).length + 1] = [length, procent   , seconds ]
-   localStorage.setItem(`${name}_graph`, JSON.stringify(a))
+  JustOnce = JSON.parse(localStorage.getItem(`${name}_graph`))
+  JustOnce[Object.keys(JustOnce).length + 1] = [length, procent   , seconds ]
+   localStorage.setItem(`${name}_graph`, JSON.stringify(JustOnce))
 }else{
   localStorage.setItem(`${name}_graph`, JSON.stringify({1: [length, procent   , seconds ]}))
-  a = {1: [length, procent   , seconds ]}
+  JustOnce = {1: [length, procent   , seconds ]}
 }
-console.log(a) 
+console.log(JustOnce) 
 }
-store_Graph( nameOfRithtNow, lenthOfRithNow , procentOfRithtNow , secondsOfRithtNow )
+store_Graph( nameOfRithtNow, lenthOfRithNow , procentOfRithtNow , tratata )
 
       
-      
 
 
 
 
 
+// /////////////////////////////////////////////////////////////////////////////
 
 
+const renderGraph = (data) => {
+            const graphContainer = document.getElementById('graph');
+            const everage = document.getElementById("everage");
+            const dataTime = document.getElementById("datatime")
+            let countAverage = 0;
+            Object.entries(data).forEach((elem)=>{
+                const a = elem[1][2]
+                countAverage += a
+            });
 
+            const egal = Math.round(countAverage / Object.entries(data).length) 
+    const minutes = Math.floor(egal / 60); // Get the whole number of minutes
+    const remainingSeconds = egal % 60;   // Get the remaining seconds
+    dataTime.innerText = `${minutes} : ${remainingSeconds}`
+    
 
+            // Get the highest first value in the trend
+            const maxWidth = Math.max(...Object.values(data).map(arr => arr[0]));
 
+            // Set the graph container's height to the highest first value
+            
+            
+            const numKeys = Object.keys(data).length;
+            const barWidth = graphContainer.offsetWidth / numKeys -1;
+            const line = document.getElementById("everage");
+            line.style.height = `${egal/4}px`
+            
 
+            Object.entries(data).forEach(([key, [width, height , time]]) => {
+                
+                const bar = document.createElement('div');
+                const barInside = document.createElement('div');
+                const timeBar = document.createElement("div")
+                barInside.id = 'barInside'
+                timeBar.id = 'timeBar'
+                bar.className = 'bar';
+                barInside.style.height = `${width*0.65}px`
+                timeBar.style.height = `${(time / 4)}px`
+               
+                
+                
+                
+                bar.style.width = `${barWidth - 10}px`; // Adjust bar width for spacing
+
+                // Set the height of the bar as a percentage of the second value relative to the first
+                const barHeight = (width / 100) * height;
+                bar.style.height = `${barHeight*0.65}px`;
+
+                bar.style.bottom = '20px'; // Offset for the x-axis
+                bar.style.left = `${(key - 1) * barWidth}px`;
+                bar.appendChild(barInside)
+                bar.appendChild(timeBar)
+                graphContainer.appendChild(bar);
+            });
+
+           
+
+            
+        }
+
+        renderGraph(JustOnce);
 
 
 
@@ -1767,6 +1896,8 @@ const addCircle = document.getElementById('add-circle');
 
           const leftBelow = document.querySelector(".the_time_spent")
         const didItStarted = document.querySelector(".didItStarted")
+        const theTend = document.getElementById("end")
+        
       
 
       // Retrieve the stored total time from local storage or initialize it to 0
@@ -1820,7 +1951,23 @@ const addCircle = document.getElementById('add-circle');
             const lungimea = Object.keys(jsonData).length;
 
             nameOfRithtNow = currentEditingCircle.dataset.name;
-            lenthOfRithNow = Object.keys(jsonData).length;
+
+            
+
+             let gush = 0;
+             if (theTend.placeholder === "end") {
+              gush = Object.keys(jsonData).length
+             }
+             
+             if(theTend.value){
+              gush = theTend.value
+             }else{
+              gush = theTend.placeholder === "end" ? gush = Object.keys(jsonData).length :  Number(theTend.placeholder)
+             }
+
+
+
+            lenthOfRithNow = Number(gush);
                
 
 
