@@ -536,15 +536,55 @@ color: red;
             position: absolute;
             bottom: 0;
             left: 0;
+            display: flex;
+            justify-content: center;
 
         }
         #barInside{
             width: 33%;
+            display: flex;
+            justify-content: center;
             position: absolute;
             bottom: 0;
             right: 0;
             background-color: grey;
         }
+        
+       #procentParagraph{
+        position: absolute;
+        bottom: 0;
+        color: white;
+            font-size: 1vw;
+            margin: 0;
+            transform: rotate(-90deg);
+
+       }
+       #lenthParagraph{
+        position: absolute;
+        bottom: 0;
+        color: white;
+            font-size: 1vw;
+            margin: 0;
+            transform: rotate(-90deg);
+        
+      }
+      #timeParagraph{
+        position: absolute;
+        bottom: 0;
+        color: white;
+            font-size: 1vw;
+            margin: 0;
+            transform: rotate(-90deg);
+        
+      }
+
+
+
+
+
+
+
+
         #everage{
           position: absolute;
           bottom: 20px;
@@ -862,7 +902,7 @@ let videoNumb = 65
 let right = 0;
 let turn = 1;
 let videoSequence = [];
-let afirmations = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+let africa = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 let hintNumb = 0;
 
 
@@ -884,7 +924,7 @@ function shuffleArray(array) {
 
 
 
-afirmations = shuffleArray(afirmations);
+afirmations = shuffleArray(africa);
 
 
 let finish = 0;
@@ -1025,12 +1065,32 @@ const renderGraph = (data) => {
                 
                 const bar = document.createElement('div');
                 const barInside = document.createElement('div');
-                const timeBar = document.createElement("div")
+                const timeBar = document.createElement("div");
+                const procentParagraph = document.createElement("div");
+                const lenthtParagraph = document.createElement("div");
+                const timeParagraph = document.createElement("div");
                 barInside.id = 'barInside'
                 timeBar.id = 'timeBar'
                 bar.className = 'bar';
                 barInside.style.height = `${width*0.65}px`
                 timeBar.style.height = `${(time / 4)}px`
+                procentParagraph.id = "procentParagraph";
+                lenthtParagraph.id = "lenthParagraph";
+                timeParagraph.id = "timeParagraph";
+                procentParagraph.innerText = `${height}%`;
+                lenthtParagraph.innerText = width;
+
+
+                const minutes444 = Math.floor(time / 60);
+                const seconds444 = time % 60;
+
+
+                timeParagraph.innerText = `${minutes444} : ${seconds444}`;
+
+                bar.append(procentParagraph);
+                barInside.append(lenthtParagraph);
+                timeBar.append(timeParagraph)
+
                
                 
                 
