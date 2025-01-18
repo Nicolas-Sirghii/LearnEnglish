@@ -7,100 +7,112 @@
   <style>
     body{
       background-color: rgb(68, 63, 63);
-      color:  white;
-      font-size: 4vh;
+      
+    }
+    #container{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #message{
+   font-size: 7vw;
+   color: white;
+   font-weight: 900;
     }
   </style>
 </head>
 <body>
-  <div>English first</div>
-  <div>German second</div>
-  <div>JSdata third</div>
+  <div id="container">
+    <div id="message">Open console</div>
+  </div>
+  
+  
   <script>
  const germanData = {
 
-166: "geburtsdatum",
-165: "mittlerweile",
-164: "eroffnen",
-163: "wutend",
-162: "stinksauer",
-161: "witzig",
-160: "belugen",
-159: "sorgen",
-158: "kummern",
-157: "deutschkenntnisse",
-156: "reicht",
-155: "jurastudium",
-154: "auf keinen fall",
-153: "eben",
-152: "froh",
-151: "au-pair-madchen",
-150: "pass auf",
-149: "hupen",
-148: "bremse",
-147: "heimat",
-146: "heimweh",
-145: "aufenthaltserlaubnis",
-144: "bewegen",
-143: "salbe",
-142: "behandlungsraum",
-141: "krankenversicherung",
-140: "versichertenkarte",
-139: "praxis",
-138: "rontgen",
-137: "auftreten",
-136: "kuhlen",
-135: "bein",
-134: "ab",
-133: "ernahrung",
-132: "trotzdem",
-131: "ausruhen",
-130: "am weitesten",
-129: "ballpumpe",
-128: "bescheid",
-127: "tore schiesen",
-126: "verletzt",
-125: "verbande",
-124: "verpflegung",
-123: "hutchen",
-122: "verwandten",
-121: "giesen",
-120: "verreisen",
-119: "ungefahr",
-118: "seit",
-117: "stecken",
-116: "flur",
-115: "gestreiftes",
-114: "uberraschung",
-113: "falls",
-112: "passen",
-111: "buntes",
-110: "sonst alles",
-109: "mutze",
-108: "gleich",
-107: "gemein",
-106: "spaziergang machen",
-105: "wegfahren",
-104: "schlimm",
-103: "frieren",
-102: "entspannen",
-101: "vermissen",
-100: "meer",
-99: "kaum",
-98: "backen",
-97: "ofen",
-96: "shieben",
-95: "wurfel",
-94: "pizzateig",
-93: "zum schluss",
-92: "danach",
-91: "zwiebeln schneiden",
-90: "schaffen",
-89: "wahl",
-88: "gunstig",
-87: "angebot",
-86: "die halfte",
-85: "roggenbrot",
+165: "geburtsdatum",
+164: "mittlerweile",
+163: "eroffnen",
+162: "wutend",
+161: "stinksauer",
+160: "witzig",
+159: "belugen",
+158: "sorgen",
+157: "kummern",
+156: "deutschkenntnisse",
+155: "reicht",
+154: "jurastudium",
+153: "auf keinen fall",
+152: "eben",
+151: "froh",
+150: "au-pair-madchen",
+149: "pass auf",
+148: "hupen",
+147: "bremse",
+146: "heimat",
+145: "heimweh",
+144: "aufenthaltserlaubnis",
+143: "bewegen",
+142: "salbe",
+141: "behandlungsraum",
+140: "krankenversicherung",
+139: "versichertenkarte",
+138: "praxis",
+137: "rontgen",
+136: "auftreten",
+135: "kuhlen",
+134: "bein",
+133: "ab",
+132: "ernahrung",
+131: "trotzdem",
+130: "ausruhen",
+129: "am weitesten",
+128: "ballpumpe",
+127: "bescheid",
+126: "tore schiesen",
+125: "verletzt",
+124: "verbande",
+123: "verpflegung",
+122: "hutchen",
+121: "verwandten",
+120: "giesen",
+119: "verreisen",
+118: "ungefahr",
+117: "seit",
+116: "stecken",
+115: "flur",
+114: "gestreiftes",
+113: "uberraschung",
+112: "falls",
+111: "passen",
+110: "buntes",
+109: "sonst alles",
+108: "mutze",
+107: "gleich",
+106: "gemein",
+105: "spaziergang machen",
+104: "wegfahren",
+103: "schlimm",
+102: "frieren",
+101: "entspannen",
+100: "vermissen",
+99: "meer",
+98: "kaum",
+97: "backen",
+96: "ofen",
+95: "shieben",
+94: "wurfel",
+93: "pizzateig",
+92: "zum schluss",
+91: "danach",
+90: "zwiebeln schneiden",
+89: "schaffen",
+88: "wahl",
+87: "gunstig",
+86: "angebot",
+85: "die halfte",
 84: "hahnchen",
 83: "abendbrot",
 82: "gurken",
@@ -357,7 +369,7 @@ const JSdata = {
 90: "logical operators",
 89: "math.random()",
 88: "algorithm",
-87: "if else",
+87: "else if",
 86: "branches",
 85: "if-statements",
 84: "lower",
@@ -446,15 +458,49 @@ const JSdata = {
 1: "success",
 };
 
+const e_commerce = {
+
+
+23: "valuable lessons",
+22: "yes",
+21: "exceptional",
+20: "excellent",
+19: "loyal",
+18: "celebrate every milestone",
+17: "grateful",
+16: "embrace",
+15: "yes",
+14: "entrepreneur",
+13: "discipline",
+12: "resources",
+11: "yes",
+10: "effectively",
+9: "high",
+8: "wisely",
+7: "e-commerce business",
+6: "adaptable",
+5: "i'm focused",
+4: "they come true",
+3: "joyful and free",
+2: "new strategies",
+1: "success",
+};
 
 
 
 
-
-
+    console.log("...................English.....................")
     console.log(englishrdata)
+    console.log("...............................................")
+    console.log("....................German.....................")
     console.log(germanData)
+    console.log("...............................................")
+    console.log("..................JavaScript...................")
     console.log(JSdata)
+    console.log("...............................................")
+    console.log("..................E-commerce...................")
+    console.log(e_commerce)
+    console.log("...............................................")
   </script>
 </body>
 </html>
