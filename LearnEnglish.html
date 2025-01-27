@@ -578,6 +578,15 @@ color: red;
         
       }
 
+      #day_month{
+        position: absolute;
+        top: 2vh;
+        color: white;
+            font-size: 1vw;
+            margin: 0;
+            transform: rotate(-90deg);
+      }
+
 
 
 
@@ -1008,17 +1017,29 @@ function playVideosSequentially(videoList) {
 
         const store_Graph = ( name , length , procent , seconds)=>{
 
+          let dayToday = "";
+
+          const logDayAndMonth = () => {
+            const today = new Date();
+            const day = today.getDate(); // Gets the day of the month
+            const month = today.toLocaleString('en-US', { month: 'long' }); // Gets the full month name
+            dayToday = `${day}_${month}`;
+          }
+
+          logDayAndMonth();
+
+
       
 
 let a = {}
 
 if (localStorage.getItem(`${name}_graph`)) {
   JustOnce = JSON.parse(localStorage.getItem(`${name}_graph`))
-  JustOnce[Object.keys(JustOnce).length + 1] = [length, procent   , seconds ]
+  JustOnce[Object.keys(JustOnce).length + 1] = [length, procent   , seconds , dayToday ]
    localStorage.setItem(`${name}_graph`, JSON.stringify(JustOnce))
 }else{
-  localStorage.setItem(`${name}_graph`, JSON.stringify({1: [length, procent   , seconds ]}))
-  JustOnce = {1: [length, procent   , seconds ]}
+  localStorage.setItem(`${name}_graph`, JSON.stringify({1: [length, procent   , seconds , dayToday ]}))
+  JustOnce = {1: [length, procent   , seconds , dayToday ]}
 }
 console.log(JustOnce) 
 }
@@ -1059,9 +1080,21 @@ const renderGraph = (data) => {
             const barWidth = graphContainer.offsetWidth / numKeys -1;
             const line = document.getElementById("everage");
             line.style.height = `${egal/4}px`
+
+
+
             
 
-            Object.entries(data).forEach(([key, [width, height , time]]) => {
+            Object.entries(data).forEach(([key, [width, height , time , ttt]]) => {
+
+
+
+                
+
+
+
+
+
                 
                 const bar = document.createElement('div');
                 const barInside = document.createElement('div');
@@ -1069,6 +1102,14 @@ const renderGraph = (data) => {
                 const procentParagraph = document.createElement("div");
                 const lenthtParagraph = document.createElement("div");
                 const timeParagraph = document.createElement("div");
+                const time_ttt = document.createElement("div");
+                time_ttt.id = "day_month"
+                time_ttt.innerText = ttt || "unknown" ;
+
+
+
+
+
                 barInside.id = 'barInside'
                 timeBar.id = 'timeBar'
                 bar.className = 'bar';
@@ -1089,7 +1130,8 @@ const renderGraph = (data) => {
 
                 bar.append(procentParagraph);
                 barInside.append(lenthtParagraph);
-                timeBar.append(timeParagraph)
+                timeBar.append(timeParagraph);
+                timeBar.append(time_ttt);
 
                
                 
